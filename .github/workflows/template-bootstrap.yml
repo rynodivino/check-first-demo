@@ -1,0 +1,17 @@
+name: Template Bootstrap
+on: [push]
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Check if this is the first commit
+        id: first
+        uses: rynodivino/check-first-commit@v1
+      - name: Replace tokens with repo name
+        if: steps.first.outputs.first_commit == 'true'
+        run: echo "This is the first commit in the repository"
+      - name: Handle subsequent commits
+        if: steps.first.outputs.first_commit != 'true'
+        run: echo "This is not the first commit - could be a second commit, fork, or other push"

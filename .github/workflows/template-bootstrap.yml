@@ -6,6 +6,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Check if this is the first commit
         id: first
         uses: rynodivino/check-first-commit@v1
